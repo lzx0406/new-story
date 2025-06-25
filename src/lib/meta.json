@@ -1,0 +1,8 @@
+{
+    "timestamp" : "temporal",
+    "source"    : "nominal",
+    "platform"  : "nominal",
+    "type"      : "nominal",    
+    "text_len"  : "quant"
+}
+  
