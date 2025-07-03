@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data: number[] = [];
 	export let color: string = '#888';
-	const width = 60;
+	const width = 100;
 	const height = 20;
 
 	$: max = Math.max(...data, 1);

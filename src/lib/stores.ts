@@ -14,6 +14,6 @@ export const cfg = writable<ChartConfig>({
 	chart: 'point',
 	x: 'timestamp',
 	y: 'text_len',
-	color: 'platform',
+	color: 'source',
 	timeUnit: false
 });

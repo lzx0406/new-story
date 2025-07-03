@@ -31,13 +31,22 @@
 		</section>
 
 		<section>
-			{#if breakdownTree && breakdownTree.length}
-				{#each breakdownTree as node}
-					<BreakdownTree {node} />
-				{/each}
-			{:else}
-				<p>Loading breakdown tree...</p>
-			{/if}
+			<div class="breakdown-table">
+				<div class="breakdown-header">
+					<span class="header-label">Label</span>
+					<span class="header-count">Count</span>
+					<span class="header-timeseries">Time Series</span>
+				</div>
+				<div class="breakdown-body">
+					{#if breakdownTree && breakdownTree.length}
+						{#each breakdownTree as node}
+							<BreakdownTree {node} />
+						{/each}
+					{:else}
+						<p>Loading breakdown tree...</p>
+					{/if}
+				</div>
+			</div>
 		</section>
 	</div>
 </div>
@@ -47,5 +56,41 @@
 		margin: 3% 0% 0% 0%;
 		font-family: lato, system-ui, sans-serif;
 		/* font-size: 1.2rem; */
+	}
+	.breakdown-table {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+	.breakdown-header,
+	.breakdown-row {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		align-items: center;
+		gap: 1rem;
+	}
+	.breakdown-header {
+		font-weight: bold;
+		/* font-size: 1.1rem; */
+		margin-bottom: 1rem;
+		color: #222;
+	}
+	.breakdown-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+	.node-label {
+		display: flex;
+		align-items: center;
+		min-width: 180px;
+	}
+	.node-count {
+		display: flex;
+		align-items: center;
+		min-width: 60px;
+	}
+	.node-timeseries {
+		min-width: 80px;
 	}
 </style>

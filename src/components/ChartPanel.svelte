@@ -122,13 +122,13 @@
 	/* -------- buttons -------- */
 	.buttons {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		gap: 4px;
 		margin-top: 8px;
 		width: 70px;
 	}
 	button {
-		padding: 4px 0;
+		padding: 4px 8px;
 		background: #e5e7eb;
 		border: none;
 		border-radius: 4px;

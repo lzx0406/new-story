@@ -2,6 +2,8 @@
 	import MiniTimeSeries from './MiniTimeSeries.svelte';
 	import type { BreakdownNode } from '../lib/types';
 	import BreakdownTree from './BreakdownTree.svelte';
+	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
+	import { faArrowTurnDown } from '@fortawesome/free-solid-svg-icons';
 
 	export let node: BreakdownNode;
 	export let level: number = 0;
@@ -12,16 +14,26 @@
 </script>
 
 {#if node}
-	<div style="margin-left: {level * 16}px; display: flex; align-items: center;">
-		<span class="node-label">{node.label}</span>
-		<span class="node-count">{node.count}</span>
-		<div class="count-bar-container">
-			<div
-				class="count-bar"
-				style="width: {maxCount ? (node.count / maxCount) * 80 : 80}px; background: {color};"
-			></div>
-		</div>
-		<MiniTimeSeries data={node.miniTimeSeries} {color} />
+	<div class="breakdown-row">
+		<span class="node-label" style="margin-left: {level * 16}px;">
+			<FontAwesomeIcon
+				icon={faArrowTurnDown}
+				style="margin-right: 6px; transform: rotate(270deg) scaleX(-1); color: gray;"
+			/>
+			{node.label}
+		</span>
+		<span class="node-count">
+			<div class="count-bar-container">
+				<div
+					class="count-bar"
+					style="width: {maxCount ? (node.count / maxCount) * 80 : 80}px; background: {color};"
+				></div>
+			</div>
+			{node.count}
+		</span>
+		<span class="node-timeseries">
+			<MiniTimeSeries data={node.miniTimeSeries} {color} />
+		</span>
 	</div>
 	{#if node.children}
 		{#each node.children as child}
@@ -36,19 +48,31 @@
 {/if}
 
 <style>
+	.breakdown-row {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 0.5rem;
+	}
 	.node-label {
-		margin-bottom: 1rem;
+		display: flex;
+		align-items: center;
 		min-width: 180px;
 	}
 	.node-count {
-		margin-bottom: 1rem;
+		display: flex;
+		align-items: center;
 		min-width: 60px;
+	}
+	.node-timeseries {
+		min-width: 80px;
 	}
 	.count-bar-container {
 		height: 12px;
 		width: 80px;
 		background: #eee;
-		margin: 0 8px;
+		margin: 0 4px;
 		border-radius: 6px;
 		overflow: hidden;
 	}
